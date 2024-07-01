@@ -385,10 +385,18 @@
     "name": "lightheadfox.ru.library_system.web.rest.BookController",
     "queryAllPublicMethods": true,
     "queryAllDeclaredMethods": true,
+    "methods": [
+      {
+        "name": "getBookTitle",
+        "parameterTypes": [ ]
+      }
+    ],
     "queriedMethods": [
       {
         "name": "<init>",
-        "parameterTypes": [ ]
+        "parameterTypes": [
+          "lightheadfox.ru.library_system.service.impl.BookServiceImpl"
+        ]
       }
     ]
   },
@@ -5758,7 +5766,7 @@
       {
         "name": "setDefaultProperties",
         "parameterTypes": [
-          "java.util.Properties"
+          "java.util.Map"
         ]
       },
       {

@@ -10,62 +10,62 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public Book getBookAuthor(String author) {
-        return null;
+    public String getBookAuthor() {
+        return "Author: ";
     }
 
     @Override
-    public Book getBookName(String title) {
-        return null;
+    public String getBookTitle() {
+        return "Title: ";
     }
 
     @Override
-    public Book getBookDescription(String description) {
-        return null;
+    public String getBookDescription() {
+        return "Description: ";
     }
 
     @Override
-    public Book getBookGenre(String genre) {
-        return null;
+    public String getBookGenre() {
+        return "Genre: ";
     }
 
     @Override
-    public Book getBookSubGenre(String subGenre) {
-        return null;
+    public String getBookSubGenre() {
+        return "Sub Genre: ";
     }
 
     @Override
-    public Book getBookYear(int year) {
-        return null;
+    public Integer getBookYear() {
+        return 1993;
     }
 
     @Override
-    public Book getBookISBN(int ISBN) {
-        return null;
+    public Integer getBookISBN() {
+        return 1651651543;
     }
 
     @Override
-    public Book getBookPublicationDate(int publicationDate) {
-        return null;
+    public Integer getBookPublicationDate() {
+        return 1990;
     }
 
     @Override
-    public Book getBookLanguage(String language) {
-        return null;
+    public String getBookLanguage() {
+        return "Language: ";
     }
 
     @Override
-    public Book getBookPageLength(int pageLength) {
-        return null;
+    public Integer getBookPageLength() {
+        return 555;
     }
 
     @Override
-    public Book getBookComingSoonDate(int comingSoonDate) {
-        return null;
+    public Integer getBookComingSoonDate() {
+        return 1995;
     }
 
     @Override
-    public Book getBookQuantitity(int quantity) {
-        return null;
+    public Integer getBookQuantitity() {
+        return 999;
     }
 }

@@ -4,29 +4,29 @@ import lightheadfox.ru.library_system.domain.Book;
 
 public interface BookService {
 
-    Book getBookAuthor(String author);
+    String getBookAuthor();
 
-    Book getBookName(String title);
+    String getBookTitle();
 
-    Book getBookDescription(String description);
+    String getBookDescription();
 
-    Book getBookGenre(String genre);
+    String getBookGenre();
 
-    Book getBookSubGenre(String subGenre);
+    String getBookSubGenre();
 
-    Book getBookYear(int year);
+    Integer getBookYear();
 
-    Book getBookISBN(int ISBN);
+    Integer getBookISBN();
 
-    Book getBookPublicationDate(int publicationDate);
+    Integer getBookPublicationDate();
 
-    Book getBookLanguage(String language);
+    String getBookLanguage();
 
-    Book getBookPageLength(int pageLength);
+    Integer getBookPageLength();
 
-    Book getBookComingSoonDate(int comingSoonDate);
+    Integer getBookComingSoonDate();
 
-    Book getBookQuantitity(int quantity);
+    Integer getBookQuantitity();
 
 
 

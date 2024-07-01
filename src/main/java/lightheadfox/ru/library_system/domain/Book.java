@@ -4,7 +4,6 @@ package lightheadfox.ru.library_system.domain;
 import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
 
 
