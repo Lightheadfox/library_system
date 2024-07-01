@@ -1,25 +1,31 @@
 package lightheadfox.ru.library_system.web.rest;
 
 
+import lightheadfox.ru.library_system.service.BookInterface;
 import lightheadfox.ru.library_system.service.BookService;
-import lightheadfox.ru.library_system.service.impl.BookServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BookController extends BaseController{
 
-    private final BookServiceImpl bookServiceImpl;
-    private BookService bookService;
 
-    public BookController(BookServiceImpl bookServiceImpl) {
+    private BookInterface bookService;
+
+    public BookController(BookService bookService) {
+
+
         super();
-        this.bookServiceImpl = bookServiceImpl;
+        System.out.println("BookController");
+        this.bookService = bookService;
+
+
     }
 
     @GetMapping("/get_book_title")
     public void getBookTitle(){
-        System.out.println(bookServiceImpl.getBookTitle());
+        System.out.println(bookService.getBookTitle());
+
 
     }
 

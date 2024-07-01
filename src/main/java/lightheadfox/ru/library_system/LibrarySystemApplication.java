@@ -11,7 +11,7 @@ public class LibrarySystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibrarySystemApplication.class, args);
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+       // AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 
 
 

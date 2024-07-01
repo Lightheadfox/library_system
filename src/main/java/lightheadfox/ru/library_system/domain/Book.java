@@ -3,9 +3,10 @@ package lightheadfox.ru.library_system.domain;
 
 import jakarta.persistence.Column;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Entity;
-
+import lombok.Setter;
 
 
 import java.io.Serializable;
@@ -13,10 +14,12 @@ import java.io.Serializable;
 @Data
 @Entity
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
 
     @Column(nullable = false)
     private String author;
@@ -53,6 +56,9 @@ public class Book implements Serializable {
 
     @Column
     private Integer quantity;
+
+
+
 
 
 }

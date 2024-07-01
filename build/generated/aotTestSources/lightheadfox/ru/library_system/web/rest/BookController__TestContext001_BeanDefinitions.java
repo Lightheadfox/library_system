@@ -1,6 +1,6 @@
 package lightheadfox.ru.library_system.web.rest;
 
-import lightheadfox.ru.library_system.service.impl.BookServiceImpl;
+import lightheadfox.ru.library_system.service.BookService;
 import org.springframework.aot.generate.Generated;
 import org.springframework.beans.factory.aot.BeanInstanceSupplier;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -15,7 +15,7 @@ public class BookController__TestContext001_BeanDefinitions {
    * Get the bean instance supplier for 'bookController'.
    */
   private static BeanInstanceSupplier<BookController> getBookControllerInstanceSupplier() {
-    return BeanInstanceSupplier.<BookController>forConstructor(BookServiceImpl.class)
+    return BeanInstanceSupplier.<BookController>forConstructor(BookService.class)
             .withGenerator((registeredBean, args) -> new BookController(args.get(0)));
   }
 
