@@ -5806,7 +5806,7 @@
       {
         "name": "setDefaultProperties",
         "parameterTypes": [
-          "java.util.Properties"
+          "java.util.Map"
         ]
       },
       {

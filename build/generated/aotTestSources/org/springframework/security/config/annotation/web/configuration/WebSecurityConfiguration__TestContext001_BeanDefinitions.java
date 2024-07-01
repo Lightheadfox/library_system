@@ -90,7 +90,7 @@ public class WebSecurityConfiguration__TestContext001_BeanDefinitions {
   }
 
   /**
-   * Get the bean instance supplier for '(inner bean)#685f5d0d'.
+   * Get the bean instance supplier for '(inner bean)#339f3a55'.
    */
   private static BeanInstanceSupplier<Filter> getSpringSecurityFilterChainInnerBeanInstanceSupplier(
       ) {
