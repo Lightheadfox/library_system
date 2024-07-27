@@ -12,7 +12,6 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Data
-@Entity
 @NoArgsConstructor
 @Getter
 @Setter

@@ -12,7 +12,9 @@ public interface BookInterface {
 
     List<Book> getAllBooks();
 
+    void addBook(Long id);
 
+    void deleteBook(Long id);
     /*
     String getBookAuthor();
 

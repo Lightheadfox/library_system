@@ -11,8 +11,18 @@ public class BookService implements BookInterface {
     @Override
     public Book getBook(Long id) {
         Book book = new Book();
-        book.
-        return new Book();
+        book.setAuthor("Author");
+        book.setTitle("Title");
+        book.setIsbn(15315);
+        book.setDescription("Description");
+        book.setGenre("genre");
+        book.setLanguage("English");
+        book.setQuantity(15354);
+        book.setPublicationDate(1990);
+        book.setComingSoonDate(1995);
+        book.setSubGenre("SubGenre");
+        book.setPageLength(1550);
+        return book;
     }
 
     @Override
@@ -20,9 +30,24 @@ public class BookService implements BookInterface {
         return List.of();
     }
 
+
+    private List<Book> allBooks = List.of(new Book());
+
     @Override
     public List<Book> getAllBooks() {
-        return List.of();
+
+
+        return this.allBooks;
+    }
+
+    @Override
+    public void addBook(Long id) {
+
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+
     }
 
 
