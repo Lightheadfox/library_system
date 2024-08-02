@@ -1,6 +1,9 @@
 package lightheadfox.ru.library_system.service;
 
 import lightheadfox.ru.library_system.domain.Book;
+import lightheadfox.ru.library_system.repository.BookRepository;
+import lightheadfox.ru.library_system.repository.BookStorage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -8,22 +11,20 @@ import java.util.List;
 @Component
 
 public class BookService implements BookInterface {
+
+    @Autowired
+    public BookStorage storage;
+    @Autowired
+    private BookRepository bookRepository;
+
+
     @Override
     public Book getBook(Long id) {
-        Book book = new Book();
-        book.setAuthor("Author");
-        book.setTitle("Title");
-        book.setIsbn(15315);
-        book.setDescription("Description");
-        book.setGenre("genre");
-        book.setLanguage("English");
-        book.setQuantity(15354);
-        book.setPublicationDate(1990);
-        book.setComingSoonDate(1995);
-        book.setSubGenre("SubGenre");
-        book.setPageLength(1550);
+        Book book = bookRepository.getBookFromStorage(id);
+
         return book;
     }
+
 
     @Override
     public List<Book> getBookByGenre(String genre) {
@@ -40,81 +41,109 @@ public class BookService implements BookInterface {
         return this.allBooks;
     }
 
-    @Override
-    public void addBook(Long id) {
 
+    // TODO: Implement adding book to a list
+
+    /**
+     * @param id
+     * @param author
+     * @param title
+     * @param isbn
+     */
+
+
+    @Override
+    public void addBook(Long id, String author, String title, int isbn, String description, String genre, String language, int quantity, int publicationDate, int comingSoonDate, String subGenre, int pageLength) {
+        Book book = new Book();
+        book.setId(id);
+        book.setAuthor(author);
+        book.setTitle(title);
+        book.setIsbn(isbn);
+        book.setDescription(description);
+        book.setGenre(genre);
+        book.setLanguage(language);
+        book.setQuantity(quantity);
+        book.setPublicationDate(publicationDate);
+        book.setComingSoonDate(comingSoonDate);
+        book.setSubGenre(subGenre);
+        book.setPageLength(pageLength);
+        bookRepository.saveBook(book);
     }
+
+
+    // TODO implement Interface deleteBook
+    // (!) Dont use in multithreading
+    //
+
 
     @Override
     public void deleteBook(Long id) {
+        bookRepository.deleteBookFromStorage(id);
 
     }
 
 
-
-
-
-/*
     @Override
-    public String getBookAuthor() {
-        return "Author: ";
-    }
+    public String getBookAuthor(Long id) {
 
-    @Override
-    public String getBookTitle() {
-        return "Title: ";
+
+        return "Author: " + bookRepository.getBookFromStorage(id).getAuthor();
     }
 
     @Override
-    public String getBookDescription() {
-        return "Description: ";
+    public String getBookTitle(Long id) {
+        return "Title: " + bookRepository.getBookFromStorage(id).getTitle();
     }
 
     @Override
-    public String getBookGenre() {
-        return "Genre: ";
+    public String getBookDescription(Long id) {
+        return "Description: " + bookRepository.getBookFromStorage(id).getDescription();
     }
 
     @Override
-    public String getBookSubGenre() {
-        return "Sub Genre: ";
+    public String getBookGenre(Long id) {
+        return "Genre: " + bookRepository.getBookFromStorage(id).getGenre();
     }
 
     @Override
-    public Integer getBookYear() {
-        return 1993;
+    public String getBookSubGenre(Long id) {
+        return "Sub Genre: " + bookRepository.getBookFromStorage(id).getSubGenre();
     }
 
     @Override
-    public Integer getBookISBN() {
-        return 1651651543;
+    public Integer getBookYear(Long id) {
+        return bookRepository.getBookFromStorage(id).getYear();
     }
 
     @Override
-    public Integer getBookPublicationDate() {
-        return 1990;
+    public Integer getBookISBN(Long id) {
+        return bookRepository.getBookFromStorage(id).getIsbn();
     }
 
     @Override
-    public String getBookLanguage() {
-        return "Language: ";
+    public Integer getBookPublicationDate(Long id) {
+        return bookRepository.getBookFromStorage(id).getPublicationDate();
     }
 
     @Override
-    public Integer getBookPageLength() {
-        return 555;
+    public String getBookLanguage(Long id) {
+        return "Language: " + bookRepository.getBookFromStorage(id).getLanguage();
     }
 
     @Override
-    public Integer getBookComingSoonDate() {
-        return 1995;
+    public Integer getBookPageLength(Long id) {
+        return bookRepository.getBookFromStorage(id).getPageLength();
     }
 
     @Override
-    public Integer getBookQuantitity() {
-        return 999;
+    public Integer getBookComingSoonDate(Long id) {
+        return bookRepository.getBookFromStorage(id).getComingSoonDate();
+    }
+
+    @Override
+    public Integer getBookQuantity(Long id) {
+        return bookRepository.getBookFromStorage(id).getQuantity();
     }
 
 
- */
 }

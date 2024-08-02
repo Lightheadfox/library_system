@@ -12,35 +12,37 @@ public interface BookInterface {
 
     List<Book> getAllBooks();
 
-    void addBook(Long id);
+    //void addBook(Long id);
+
+    void addBook(Long id, String author, String title, int isbn, String description, String genre, String language, int quantity, int publicationDate, int comingSoonDate, String subGenre,int pageLength);
 
     void deleteBook(Long id);
-    /*
-    String getBookAuthor();
 
-    String getBookTitle();
+    String getBookAuthor(Long id);
 
-    String getBookDescription();
+    String getBookTitle(Long id);
 
-    String getBookGenre();
+    String getBookDescription(Long id);
 
-    String getBookSubGenre();
+    String getBookGenre(Long id);
 
-    Integer getBookYear();
+    String getBookSubGenre(Long id);
 
-    Integer getBookISBN();
+    Integer getBookYear(Long id);
 
-    Integer getBookPublicationDate();
+    Integer getBookISBN(Long id);
 
-    String getBookLanguage();
+    Integer getBookPublicationDate(Long id);
 
-    Integer getBookPageLength();
+    String getBookLanguage(Long id);
 
-    Integer getBookComingSoonDate();
+    Integer getBookPageLength(Long id);
 
-    Integer getBookQuantitity();
+    Integer getBookComingSoonDate(Long id);
 
-*/
+    Integer getBookQuantity(Long id);
+
+
 
 
 

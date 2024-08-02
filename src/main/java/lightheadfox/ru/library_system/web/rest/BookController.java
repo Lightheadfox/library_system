@@ -23,13 +23,37 @@ public class BookController extends BaseController{
         super();
         System.out.println("BookController");
         this.bookService = bookService;
+        bookService.addBook(0L,
+                "author",
+                "title",
+                1234,
+                "descr",
+                "genre",
+                "lang",
+                123,
+                1990,
+                1995,
+                "subGenre",
+                1000);
+        System.out.println("------------------------------------------------------");
+        System.out.println();
+        System.out.println(bookService.getBookAuthor(0L));
+        System.out.println(bookService.getBookDescription(0L));
 
+//        bookService.deleteBook(0L);
+//        System.out.println("------------------------------------------------------");
+//        System.out.println();
+//        System.out.println(bookService.getBookAuthor(0L));
+//        System.out.println(bookService.getBookDescription(0L));
 
     }
 
+
+
+
     @GetMapping("/get_book")
     public ResponseEntity<Book> getBook(){
-        Book book = bookService.getBook(1L);
+        Book book = bookService.getBook(0L);
         ResponseEntity<Book> entity = new ResponseEntity<>(book, HttpStatus.OK);
         return entity;
     }

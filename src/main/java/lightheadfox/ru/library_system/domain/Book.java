@@ -20,6 +20,9 @@ public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
+    @Column
+    private Long id;
+
     @Column(nullable = false)
     private String author;
 
