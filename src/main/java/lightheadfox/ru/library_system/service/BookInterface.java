@@ -43,6 +43,8 @@ public interface BookInterface {
     Integer getBookQuantity(Long id);
 
 
+    // TODO implement
+   // Book updateBook(UpdateBook);
 
 
 
