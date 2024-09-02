@@ -1,6 +1,7 @@
 package lightheadfox.ru.library_system.service;
 
 import lightheadfox.ru.library_system.domain.Book;
+import lightheadfox.ru.library_system.domain.BookDTO;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface BookInterface {
 
     //void addBook(Long id);
 
-    void addBook(Long id, String author, String title, int isbn, String description, String genre, String language, int quantity, int publicationDate, int comingSoonDate, String subGenre,int pageLength);
+    void addBook(BookDTO bookDTO);
 
     void deleteBook(Long id);
 

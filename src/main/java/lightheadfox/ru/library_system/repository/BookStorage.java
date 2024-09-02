@@ -1,12 +1,15 @@
 package lightheadfox.ru.library_system.repository;
 
 import lightheadfox.ru.library_system.domain.Book;
+import lightheadfox.ru.library_system.domain.BookDTO;
 
 import java.util.List;
 
 public interface BookStorage {
 
-    public void saveBook(Book book);
+
+
+    void saveBook(BookDTO bookDTO);
 
     public Book getBookFromStorage(Long id);
 

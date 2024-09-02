@@ -1,6 +1,7 @@
 package lightheadfox.ru.library_system.service;
 
 import lightheadfox.ru.library_system.domain.Book;
+import lightheadfox.ru.library_system.domain.BookDTO;
 import lightheadfox.ru.library_system.repository.BookRepository;
 import lightheadfox.ru.library_system.repository.BookStorage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,21 +54,9 @@ public class BookService implements BookInterface {
 
 
     @Override
-    public void addBook(Long id, String author, String title, int isbn, String description, String genre, String language, int quantity, int publicationDate, int comingSoonDate, String subGenre, int pageLength) {
-        Book book = new Book();
-        book.setId(id);
-        book.setAuthor(author);
-        book.setTitle(title);
-        book.setIsbn(isbn);
-        book.setDescription(description);
-        book.setGenre(genre);
-        book.setLanguage(language);
-        book.setQuantity(quantity);
-        book.setPublicationDate(publicationDate);
-        book.setComingSoonDate(comingSoonDate);
-        book.setSubGenre(subGenre);
-        book.setPageLength(pageLength);
-        bookRepository.saveBook(book);
+    public void addBook(BookDTO bookDTO) {
+
+        bookRepository.saveBook(bookDTO);
     }
 
 
