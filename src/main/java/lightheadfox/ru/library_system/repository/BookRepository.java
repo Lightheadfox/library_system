@@ -31,6 +31,7 @@ public class BookRepository implements BookStorage {
         newBook.setComingSoonDate(bookDTO.getComingSoonDate());
         newBook.setQuantity(bookDTO.getQuantity());
         newBook.setSubGenre(bookDTO.getSubGenre());
+        newBook.setPublicationDate(bookDTO.getPublicationDate());
         storage.add(newBook);
     }
 

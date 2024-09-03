@@ -53,9 +53,28 @@ public class BookController extends BaseController{
         return entity;
     }
 
-// TODO Rename methods as rest compatible
-    // Add POST method
+    @PatchMapping("/book/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable("id") String id, @RequestBody BookDTO bookDTO){
+        Book patchBook = bookService.getBook(Long.valueOf(id));
+        patchBook.setAuthor(bookDTO.getAuthor());
+        patchBook.setTitle(bookDTO.getTitle());
+        patchBook.setIsbn(bookDTO.getIsbn());
+        patchBook.setPublicationDate(bookDTO.getPublicationDate());
+        patchBook.setQuantity(bookDTO.getQuantity());
+        patchBook.setGenre(bookDTO.getGenre());
+        patchBook.setLanguage(bookDTO.getLanguage());
+        patchBook.setQuantity(bookDTO.getQuantity());
+        patchBook.setSubGenre(bookDTO.getSubGenre());
+        patchBook.setComingSoonDate(bookDTO.getComingSoonDate());
+        patchBook.setYear(bookDTO.getYear());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id") String id){
+        bookService.deleteBook(Long.valueOf(id));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 
 
