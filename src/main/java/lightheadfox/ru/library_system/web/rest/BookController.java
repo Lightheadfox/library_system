@@ -16,17 +16,17 @@ import java.util.List;
 public class BookController extends BaseController{
 
 
-    private final BookRepository bookRepository;
+
     private BookInterface bookService;
 
-    public BookController(BookService bookService, BookRepository bookRepository) {
+    public BookController(BookService bookService) {
 
 
         super();
         System.out.println("BookController");
         this.bookService = bookService;
 
-        this.bookRepository = bookRepository;
+
     }
 
 
@@ -48,7 +48,7 @@ public class BookController extends BaseController{
 
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getAllBooks(){
-        List<Book> books = bookRepository.getAllBooks();
+       List<Book> books = bookService.getAllBooks();
         ResponseEntity<List<Book>> entity = new ResponseEntity<>(books, HttpStatus.OK);
         return entity;
     }
