@@ -79,6 +79,8 @@ public class Book {
     private Integer quantity;
 
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
