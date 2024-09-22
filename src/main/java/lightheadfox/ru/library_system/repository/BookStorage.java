@@ -2,12 +2,10 @@ package lightheadfox.ru.library_system.repository;
 
 import lightheadfox.ru.library_system.domain.Book;
 
-public interface BookStorage {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    public void saveBook(Book book);
+public interface BookStorage extends JpaRepository<Book, Long> {
 
-    public Book getBookFromStorage(Long id);
 
-    public void deleteBookFromStorage(Long id);
-
+    void deleteBookById(Long id);
 }
