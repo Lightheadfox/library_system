@@ -11,9 +11,6 @@ import lombok.Setter;
 public class BookDTO {
 
 
-
-
-
     private String author;
 
 
@@ -48,13 +45,6 @@ public class BookDTO {
 
 
     private Integer quantity;
-
-
-
-
-
-
-
 
 
 }

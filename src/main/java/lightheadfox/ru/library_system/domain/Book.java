@@ -10,10 +10,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.Vector;
+import java.util.*;
 
 @Entity
 @Table(name = "book")
@@ -21,12 +18,25 @@ import java.util.Vector;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Book implements Serializable {
+public class Book {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
 
 
-//TreeMap<String,String> treeMpa = new TreeMap<>();
+    public Book(BookDTO bookDTO) {
+        this.author = bookDTO.getAuthor();
+        this.title = bookDTO.getTitle();
+        this.language = bookDTO.getLanguage();
+        this.isbn = bookDTO.getIsbn();
+        this.publicationDate = bookDTO.getPublicationDate();
+        this.quantity = bookDTO.getQuantity();
+        this.genre = bookDTO.getGenre();
+        this.subGenre = bookDTO.getSubGenre();
+        this.comingSoonDate = bookDTO.getComingSoonDate();
+        this.year = bookDTO.getYear();
+        this.description = bookDTO.getDescription();
+
+    }
 
     @Id
     @GeneratedValue
