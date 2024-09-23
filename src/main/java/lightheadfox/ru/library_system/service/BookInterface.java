@@ -23,6 +23,6 @@ public interface BookInterface {
 
 
 
-    List<Book> fuzzySearchBooks(@Param("searchTerm") String searchTerm);
+    List<Book> fuzzySearchBooks(String searchTerm);
 
 }
