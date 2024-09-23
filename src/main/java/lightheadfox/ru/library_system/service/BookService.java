@@ -20,8 +20,8 @@ public class BookService implements BookInterface {
 
     @Autowired
     BookStorage bookRepository;
-
-
+    @Autowired
+    private BookStorage bookStorage;
 
 
     @Override
@@ -51,7 +51,6 @@ public class BookService implements BookInterface {
         bookRepository.save(newBook);
 
 
-
     }
 
     public void updateBook(Long id, BookDTO bookDTO) {
@@ -69,5 +68,11 @@ public class BookService implements BookInterface {
         patchBook.setYear(bookDTO.getYear());
         bookRepository.save(patchBook);
     }
+
+    @Override
+    public List<Book> fuzzySearchBooks(String searchTerm) {
+        return bookStorage.fuzzySearchBooks(searchTerm);
+    }
+
 
 }

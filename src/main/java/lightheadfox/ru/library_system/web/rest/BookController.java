@@ -3,6 +3,7 @@ package lightheadfox.ru.library_system.web.rest;
 
 import lightheadfox.ru.library_system.domain.Book;
 import lightheadfox.ru.library_system.domain.BookDTO;
+import lightheadfox.ru.library_system.repository.BookStorage;
 import lightheadfox.ru.library_system.service.BookInterface;
 import lightheadfox.ru.library_system.service.BookService;
 import org.springframework.http.HttpStatus;
@@ -16,14 +17,16 @@ import java.util.List;
 public class BookController extends BaseController {
 
 
+    private final BookStorage bookStorage;
     private BookInterface bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookStorage bookStorage) {
 
 
         super();
         System.out.println("BookController");
         this.bookService = bookService;
+        this.bookStorage = bookStorage;
     }
 
 
@@ -60,6 +63,26 @@ public class BookController extends BaseController {
     public ResponseEntity<?> deleteBook(@PathVariable("id") String id) {
         bookService.deleteBook(Long.valueOf(id));
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/book/search/{query}")
+    public ResponseEntity<?> searchBook(@PathVariable("query") String query) {
+
+        if (bookStorage.findByAuthorContainingIgnoreCase(query) != null) {
+            return new ResponseEntity<>(bookStorage.findByAuthorContainingIgnoreCase(query), HttpStatus.OK);
+        } else if (bookStorage.findByTitleContainingIgnoreCase(query) != null) {
+            return new ResponseEntity<>(bookStorage.findByTitleContainingIgnoreCase(query), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
+    @GetMapping("/book/searchBooks/{searchTerm}")
+    public ResponseEntity<?> searchBooks(@PathVariable("searchTerm") String searchTerm) {
+        if (bookService.fuzzySearchBooks(searchTerm) != null) {
+            return new ResponseEntity<>(bookService.fuzzySearchBooks(searchTerm), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
