@@ -22,11 +22,17 @@ public interface BookStorage extends JpaRepository<Book, Long> {
 
     List<Book> findByDescriptionContainsIgnoreCase(String description);
 
+//    @Query(value = "SELECT * FROM book WHERE " +
+//            "SIMILARITY(author, :searchTerm) > 0.3 OR " +
+//            "SIMILARITY(title, :searchTerm) > 0.3 OR " +
+//            "SIMILARITY(description, :searchTerm) > 0.3 " +
+//            "ORDER BY GREATEST ((SIMILARITY(author, :searchTerm), SIMILARITY(title, :searchTerm), SIMILARITY(description, :searchTerm))) DESC",
+//            nativeQuery = true)
+//    List<Book> fuzzySearchBooks(@Param("searchTerm") String searchTerm);
+
     @Query(value = "SELECT * FROM book WHERE " +
-            "SIMILARITY(author, :searchTerm) > 0.3 OR " +
-            "SIMILARITY(title, :searchTerm) > 0.3 OR " +
-            "SIMILARITY(description, :searchTerm) > 0.3 " +
-            "ORDER BY GREATEST ((SIMILARITY(author, :searchTerm), SIMILARITY(title, :searchTerm), SIMILARITY(description, :searchTerm))) DESC",
-            nativeQuery = true)
+            "author LIKE %:searchTerm% OR " +
+            "title LIKE %:searchTerm% OR " +
+    "description Like %:searchTerm%", nativeQuery = true)
     List<Book> fuzzySearchBooks(@Param("searchTerm") String searchTerm);
 }
