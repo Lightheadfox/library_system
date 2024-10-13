@@ -35,4 +35,8 @@ public interface BookStorage extends JpaRepository<Book, Long> {
             "title LIKE %:searchTerm% OR " +
     "description Like %:searchTerm%", nativeQuery = true)
     List<Book> fuzzySearchBooks(@Param("searchTerm") String searchTerm);
+
+
+
+
 }

@@ -1,6 +1,8 @@
 package lightheadfox.ru.library_system.domain;
 
-import jakarta.persistence.Column;
+import lightheadfox.ru.library_system.domain.ENUMS.Genres;
+import lightheadfox.ru.library_system.domain.ENUMS.Language;
+import lightheadfox.ru.library_system.domain.ENUMS.SubGenres;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +22,10 @@ public class BookDTO {
     private String description;
 
 
-    private String genre;
+    private Genres genre;
 
 
-    private String subGenre;
+    private SubGenres subGenre;
 
 
     private Integer year;
@@ -35,7 +37,7 @@ public class BookDTO {
     private Integer publicationDate;
 
 
-    private String language;
+    private Language language;
 
 
     private Integer pageLength;

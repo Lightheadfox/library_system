@@ -16,6 +16,10 @@ public class UserDTO {
 
     private String userEmail;
 
+    private int userAge;
+
+    private int userPhone;
+
     private String userRole;
 
 

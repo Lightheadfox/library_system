@@ -48,7 +48,10 @@ public class UserService implements UserInterface{
         patchUser.setUserName(userDTO.getUserName());
         patchUser.setUserSurname(userDTO.getUserSurname());
         patchUser.setUserEmail(userDTO.getUserEmail());
+        patchUser.setUserPhone(userDTO.getUserPhone());
+        patchUser.setUserAge(userDTO.getUserAge());
         patchUser.setUserRole(userDTO.getUserRole());
+        userRepository.save(patchUser);
 
 
     }

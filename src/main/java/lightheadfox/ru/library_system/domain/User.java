@@ -47,6 +47,12 @@ public class User {
     @Column(nullable = false)
     private String userEmail;
 
+    @Column(nullable = false)
+    private int userAge;
+
+    @Column(nullable = false)
+    private int userPhone;
+
     // TODO перевести роль на ENUM
 
     @Column(nullable = false)

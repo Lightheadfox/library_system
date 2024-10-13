@@ -6,9 +6,12 @@ import lightheadfox.ru.library_system.domain.BookDTO;
 import lightheadfox.ru.library_system.repository.BookStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,9 @@ public class BookService implements BookInterface {
     private BookStorage bookStorage;
 
 
+
+
+
     @Override
     public Book getBook(Long id) {
         Optional<Book> book = bookRepository.findById(id);
@@ -36,6 +42,17 @@ public class BookService implements BookInterface {
 
         List<Book> books = bookRepository.findAll();
         return books;
+    }
+
+    @Override
+    public List<Book> getAllBooksPaginated(Optional<String> page,Optional<String>size) {
+        int intPage = Integer.parseInt(page.orElse("0"));
+        int intSize = Integer.parseInt(size.orElse("10"));
+
+
+        Page books = bookRepository.findAll(PageRequest.of(intPage, intSize));
+
+        return books.stream().toList();
     }
 
     @Override

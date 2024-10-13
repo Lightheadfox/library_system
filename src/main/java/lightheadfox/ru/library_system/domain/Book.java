@@ -2,14 +2,15 @@ package lightheadfox.ru.library_system.domain;
 
 
 import jakarta.persistence.*;
+import lightheadfox.ru.library_system.domain.ENUMS.Genres;
+import lightheadfox.ru.library_system.domain.ENUMS.Language;
+import lightheadfox.ru.library_system.domain.ENUMS.SubGenres;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-import java.io.Serializable;
-import java.sql.Array;
 import java.util.*;
 
 @Entity
@@ -52,10 +53,12 @@ public class Book {
     private String description;
 
     @Column(nullable = false)
-    private String genre;
+    @Enumerated(EnumType.STRING)
+    private Genres genre;
 
     @Column(nullable = false)
-    private String subGenre;
+    @Enumerated(EnumType.STRING)
+    private SubGenres subGenre;
 
     @Column
     private Integer year;
@@ -67,7 +70,8 @@ public class Book {
     private Integer publicationDate;
 
     @Column(nullable = false)
-    private String language;
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
     @Column
     private Integer pageLength;
