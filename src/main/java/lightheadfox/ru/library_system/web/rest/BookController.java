@@ -2,74 +2,88 @@ package lightheadfox.ru.library_system.web.rest;
 
 
 import lightheadfox.ru.library_system.domain.Book;
+import lightheadfox.ru.library_system.domain.BookDTO;
+import lightheadfox.ru.library_system.repository.BookStorage;
 import lightheadfox.ru.library_system.service.BookInterface;
 import lightheadfox.ru.library_system.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class BookController extends BaseController{
+@RequestMapping("/api")
+public class BookController extends BaseController {
 
 
+    private final BookStorage bookStorage;
     private BookInterface bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookStorage bookStorage) {
 
 
         super();
         System.out.println("BookController");
         this.bookService = bookService;
-        bookService.addBook(0L,
-                "author",
-                "title",
-                1234,
-                "descr",
-                "genre",
-                "lang",
-                123,
-                1990,
-                1995,
-                "subGenre",
-                1000);
-        System.out.println("------------------------------------------------------");
-        System.out.println();
-        System.out.println(bookService.getBookAuthor(0L));
-        System.out.println(bookService.getBookDescription(0L));
-
-//        bookService.deleteBook(0L);
-//        System.out.println("------------------------------------------------------");
-//        System.out.println();
-//        System.out.println(bookService.getBookAuthor(0L));
-//        System.out.println(bookService.getBookDescription(0L));
-
+        this.bookStorage = bookStorage;
     }
 
 
+    @PostMapping("/book")
+    public ResponseEntity<?> createBook(@RequestBody BookDTO bookDTO) {
+        bookService.addBook(bookDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 
-    @GetMapping("/get_book")
-    public ResponseEntity<Book> getBook(){
-        Book book = bookService.getBook(0L);
+    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+
+    public ResponseEntity<Book> getBook(@PathVariable("id") String id) {
+        Book book = bookService.getBook(Long.valueOf(id));
         ResponseEntity<Book> entity = new ResponseEntity<>(book, HttpStatus.OK);
         return entity;
     }
 
-    @GetMapping("/all_books")
-    public ResponseEntity<List<Book>> getAllBooks(){
+    @GetMapping("/book")
+    public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
         ResponseEntity<List<Book>> entity = new ResponseEntity<>(books, HttpStatus.OK);
         return entity;
     }
 
+    @PatchMapping("/book/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable("id") String id, @RequestBody BookDTO bookDTO) {
 
+        bookService.updateBook(Long.valueOf(id), bookDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable("id") String id) {
+        bookService.deleteBook(Long.valueOf(id));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
+    @GetMapping("/book/search/{query}")
+    public ResponseEntity<?> searchBook(@PathVariable("query") String query) {
 
+        if (bookStorage.findByAuthorContainingIgnoreCase(query) != null) {
+            return new ResponseEntity<>(bookStorage.findByAuthorContainingIgnoreCase(query), HttpStatus.OK);
+        } else if (bookStorage.findByTitleContainingIgnoreCase(query) != null) {
+            return new ResponseEntity<>(bookStorage.findByTitleContainingIgnoreCase(query), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+    }
+
+    @GetMapping("/book/searchBooks/{searchTerm}")
+    public ResponseEntity<?> searchBooks(@PathVariable("searchTerm") String searchTerm) {
+        if (bookService.fuzzySearchBooks(searchTerm) != null) {
+            return new ResponseEntity<>(bookService.fuzzySearchBooks(searchTerm), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 }
