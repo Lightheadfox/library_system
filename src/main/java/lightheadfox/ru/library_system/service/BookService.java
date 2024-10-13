@@ -1,148 +1,94 @@
 package lightheadfox.ru.library_system.service;
 
 import lightheadfox.ru.library_system.domain.Book;
-import lightheadfox.ru.library_system.repository.BookRepository;
+
+import lightheadfox.ru.library_system.domain.BookDTO;
 import lightheadfox.ru.library_system.repository.BookStorage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+
+import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Service
+
 
 public class BookService implements BookInterface {
 
+
     @Autowired
-    public BookStorage storage;
+    BookStorage bookRepository;
     @Autowired
-    private BookRepository bookRepository;
+    private BookStorage bookStorage;
+
+
+
 
 
     @Override
     public Book getBook(Long id) {
-        Book book = bookRepository.getBookFromStorage(id);
+        Optional<Book> book = bookRepository.findById(id);
 
-        return book;
+        return book.get();
     }
-
-
-    @Override
-    public List<Book> getBookByGenre(String genre) {
-        return List.of();
-    }
-
-
-    private List<Book> allBooks = List.of(new Book());
 
     @Override
     public List<Book> getAllBooks() {
 
-
-        return this.allBooks;
+        List<Book> books = bookRepository.findAll();
+        return books;
     }
-
-
-    // TODO: Implement adding book to a list
-
-    /**
-     * @param id
-     * @param author
-     * @param title
-     * @param isbn
-     */
-
 
     @Override
-    public void addBook(Long id, String author, String title, int isbn, String description, String genre, String language, int quantity, int publicationDate, int comingSoonDate, String subGenre, int pageLength) {
-        Book book = new Book();
-        book.setId(id);
-        book.setAuthor(author);
-        book.setTitle(title);
-        book.setIsbn(isbn);
-        book.setDescription(description);
-        book.setGenre(genre);
-        book.setLanguage(language);
-        book.setQuantity(quantity);
-        book.setPublicationDate(publicationDate);
-        book.setComingSoonDate(comingSoonDate);
-        book.setSubGenre(subGenre);
-        book.setPageLength(pageLength);
-        bookRepository.saveBook(book);
+    public List<Book> getAllBooksPaginated(Optional<String> page,Optional<String>size) {
+        int intPage = Integer.parseInt(page.orElse("0"));
+        int intSize = Integer.parseInt(size.orElse("10"));
+
+
+        Page books = bookRepository.findAll(PageRequest.of(intPage, intSize));
+
+        return books.stream().toList();
     }
-
-
-    // TODO implement Interface deleteBook
-    // (!) Dont use in multithreading
-    //
-
 
     @Override
     public void deleteBook(Long id) {
-        bookRepository.deleteBookFromStorage(id);
-
-    }
-
-
-    @Override
-    public String getBookAuthor(Long id) {
-
-
-        return "Author: " + bookRepository.getBookFromStorage(id).getAuthor();
+        bookRepository.deleteBookById(id);
     }
 
     @Override
-    public String getBookTitle(Long id) {
-        return "Title: " + bookRepository.getBookFromStorage(id).getTitle();
+    public void addBook(BookDTO bookDTO) {
+
+
+        Book newBook = new Book(bookDTO);
+        bookRepository.save(newBook);
+
+
+    }
+
+    public void updateBook(Long id, BookDTO bookDTO) {
+        Book patchBook = getBook(id);
+        patchBook.setAuthor(bookDTO.getAuthor());
+        patchBook.setTitle(bookDTO.getTitle());
+        patchBook.setIsbn(bookDTO.getIsbn());
+        patchBook.setPublicationDate(bookDTO.getPublicationDate());
+        patchBook.setQuantity(bookDTO.getQuantity());
+        patchBook.setGenre(bookDTO.getGenre());
+        patchBook.setLanguage(bookDTO.getLanguage());
+        patchBook.setQuantity(bookDTO.getQuantity());
+        patchBook.setSubGenre(bookDTO.getSubGenre());
+        patchBook.setComingSoonDate(bookDTO.getComingSoonDate());
+        patchBook.setYear(bookDTO.getYear());
+        bookRepository.save(patchBook);
     }
 
     @Override
-    public String getBookDescription(Long id) {
-        return "Description: " + bookRepository.getBookFromStorage(id).getDescription();
-    }
-
-    @Override
-    public String getBookGenre(Long id) {
-        return "Genre: " + bookRepository.getBookFromStorage(id).getGenre();
-    }
-
-    @Override
-    public String getBookSubGenre(Long id) {
-        return "Sub Genre: " + bookRepository.getBookFromStorage(id).getSubGenre();
-    }
-
-    @Override
-    public Integer getBookYear(Long id) {
-        return bookRepository.getBookFromStorage(id).getYear();
-    }
-
-    @Override
-    public Integer getBookISBN(Long id) {
-        return bookRepository.getBookFromStorage(id).getIsbn();
-    }
-
-    @Override
-    public Integer getBookPublicationDate(Long id) {
-        return bookRepository.getBookFromStorage(id).getPublicationDate();
-    }
-
-    @Override
-    public String getBookLanguage(Long id) {
-        return "Language: " + bookRepository.getBookFromStorage(id).getLanguage();
-    }
-
-    @Override
-    public Integer getBookPageLength(Long id) {
-        return bookRepository.getBookFromStorage(id).getPageLength();
-    }
-
-    @Override
-    public Integer getBookComingSoonDate(Long id) {
-        return bookRepository.getBookFromStorage(id).getComingSoonDate();
-    }
-
-    @Override
-    public Integer getBookQuantity(Long id) {
-        return bookRepository.getBookFromStorage(id).getQuantity();
+    public List<Book> fuzzySearchBooks(String searchTerm) {
+        return bookStorage.fuzzySearchBooks(searchTerm);
     }
 
 
