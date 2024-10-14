@@ -1,12 +1,12 @@
 package lightheadfox.ru.library_system.domain.ENUMS;
 
 public enum Roles {
-    NEWUSER,
-    MATUREUSER,
-    SENIORUSER,
-    LIBRARIANHELPER,
+    NEW_USER,
+    MATURE_USER,
+    SENIOR_USER,
+    LIBRARIAN_HELPER,
     LIBRARIAN,
-    CHIEFLIBRARIAN
+    CHIEF_LIBRARIAN
 
 
 

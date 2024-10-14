@@ -1,11 +1,21 @@
 package lightheadfox.ru.library_system.domain;
 
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import lightheadfox.ru.library_system.domain.ENUMS.Roles;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+
+
+
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -25,11 +35,17 @@ import lombok.Setter;
 
 public class User {
 
+
+
     public User(UserDTO userDTO) {
         this.userName = userDTO.getUserName();
         this.userSurname = userDTO.getUserSurname();
         this.userEmail = userDTO.getUserEmail();
         this.userRole = userDTO.getUserRole();
+
+        String encodedPassword = BCrypt.withDefaults().hashToString(10, userDTO.getPassword().toCharArray());
+        System.out.println(encodedPassword);
+        this.password = encodedPassword;
     }
 
 
@@ -44,6 +60,7 @@ public class User {
     @Column(nullable = false)
     private String userSurname;
 
+    @Email
     @Column(nullable = false)
     private String userEmail;
 
@@ -53,10 +70,15 @@ public class User {
     @Column(nullable = false)
     private int userPhone;
 
-    // TODO перевести роль на ENUM
+    @Column(nullable = false)
+    private Roles userRole;
 
     @Column(nullable = false)
-    private String userRole;
+    private String password;
+
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDateTime creationDate;
 
 
 }

@@ -1,9 +1,13 @@
 package lightheadfox.ru.library_system.domain;
 
 
+import lightheadfox.ru.library_system.domain.ENUMS.Roles;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -20,7 +24,13 @@ public class UserDTO {
 
     private int userPhone;
 
-    private String userRole;
+    private Roles userRole;
+
+    private String password;
+
+    private LocalDateTime creationDate;
+
+    
 
 
 

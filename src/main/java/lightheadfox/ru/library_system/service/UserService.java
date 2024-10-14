@@ -1,16 +1,18 @@
 package lightheadfox.ru.library_system.service;
+
 import lightheadfox.ru.library_system.domain.User;
 import lightheadfox.ru.library_system.domain.UserDTO;
 import lightheadfox.ru.library_system.repository.UserStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
-public class UserService implements UserInterface{
+public class UserService implements UserInterface {
 
     @Autowired
     UserStorage userRepository;
@@ -23,6 +25,7 @@ public class UserService implements UserInterface{
         return user.get();
     }
 
+
     @Override
     public List<User> getAllUsers() {
         List<User> users = userRepository.findAll();
@@ -33,6 +36,7 @@ public class UserService implements UserInterface{
     @Override
     public void addUser(UserDTO userDTO) {
         User newUser = new User(userDTO);
+
         userRepository.save(newUser);
     }
 
@@ -52,7 +56,12 @@ public class UserService implements UserInterface{
         patchUser.setUserAge(userDTO.getUserAge());
         patchUser.setUserRole(userDTO.getUserRole());
         userRepository.save(patchUser);
+    }
 
+    // TODO Business logic of promotion
+
+    @Override
+    public void userPromotion (User user){
 
     }
 }
