@@ -60,8 +60,8 @@ public class UserService implements UserInterface {
 
     // TODO Business logic of promotion
 
-    @Override
-    public void userPromotion (User user){
-
-    }
+//    @Override
+//    public void userPromotion (User user){
+//
+//    }
 }
