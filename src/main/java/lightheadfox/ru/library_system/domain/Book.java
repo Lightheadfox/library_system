@@ -1,26 +1,46 @@
 package lightheadfox.ru.library_system.domain;
 
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+import lightheadfox.ru.library_system.domain.ENUMS.Genres;
+import lightheadfox.ru.library_system.domain.ENUMS.Language;
+import lightheadfox.ru.library_system.domain.ENUMS.SubGenres;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Entity;
 import lombok.Setter;
 
 
-import java.io.Serializable;
+import java.util.*;
 
+@Entity
+@Table(name = "book")
 @Data
 @NoArgsConstructor
 @Getter
 @Setter
-public class Book implements Serializable {
+public class Book {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
 
 
-    @Column
+    public Book(BookDTO bookDTO) {
+        this.author = bookDTO.getAuthor();
+        this.title = bookDTO.getTitle();
+        this.language = bookDTO.getLanguage();
+        this.isbn = bookDTO.getIsbn();
+        this.publicationDate = bookDTO.getPublicationDate();
+        this.quantity = bookDTO.getQuantity();
+        this.genre = bookDTO.getGenre();
+        this.subGenre = bookDTO.getSubGenre();
+        this.comingSoonDate = bookDTO.getComingSoonDate();
+        this.year = bookDTO.getYear();
+        this.description = bookDTO.getDescription();
+
+    }
+
+    @Id
+    @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
@@ -33,10 +53,12 @@ public class Book implements Serializable {
     private String description;
 
     @Column(nullable = false)
-    private String genre;
+    @Enumerated(EnumType.STRING)
+    private Genres genre;
 
     @Column(nullable = false)
-    private String subGenre;
+    @Enumerated(EnumType.STRING)
+    private SubGenres subGenre;
 
     @Column
     private Integer year;
@@ -48,7 +70,8 @@ public class Book implements Serializable {
     private Integer publicationDate;
 
     @Column(nullable = false)
-    private String language;
+    @Enumerated(EnumType.STRING)
+    private Language language;
 
     @Column
     private Integer pageLength;
@@ -62,5 +85,16 @@ public class Book implements Serializable {
 
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) && Objects.equals(author, book.author);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, author);
+    }
 }
