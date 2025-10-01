@@ -10,4 +10,6 @@ public interface BookStorage {
 
     public void deleteBookFromStorage(Long id);
 
+
+
 }
